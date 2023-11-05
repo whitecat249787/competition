@@ -125,30 +125,21 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   	time[0]=HAL_GetTick();
 	time[1]=time[0];time[2]=time[0];time[3]=time[0];
-    printf("OK_1\n");
     HAL_UART_Receive_IT(&huart7,way,1);//通过输入1，2，3，4决定接下来程序进行哪个任务的操作
   while (1)
   {
     	time[0]=HAL_GetTick();
       
-//     CAN_TxHeaderTypeDef  last_four_motor_tx_message;
-//uint8_t              last_four_motor_can_send_data[8]={0};
-//    uint32_t send_mail_box;
-//    last_four_motor_tx_message.StdId = 0x101;
-//    last_four_motor_tx_message.IDE = CAN_ID_STD;
-//    last_four_motor_tx_message.RTR = CAN_RTR_DATA;
-//    last_four_motor_tx_message.DLC = 0x08;
-//    HAL_CAN_AddTxMessage(&hcan1, &last_four_motor_tx_message, last_four_motor_can_send_data, &send_mail_box);//2
-
-//HAL_Delay(100);
-      
-      //进入模式开始执行任务之前，记得将各电机的total_angle数值置为0！！！！！！！！！！！！！！！！！！！！
-			//time[1]=time[0];
-		//}
-//		if(time[0]-time[2]>100){
-//				USART_printf("%d\n",Get_dji_information(1).total_angle);
-//			time[2]=time[0];
-//		}
+      #if 0
+     CAN_TxHeaderTypeDef  last_four_motor_tx_message;
+uint8_t              last_four_motor_can_send_data[8]={0};
+    uint32_t send_mail_box;
+    last_four_motor_tx_message.StdId = 0x101;
+    last_four_motor_tx_message.IDE = CAN_ID_STD;
+    last_four_motor_tx_message.RTR = CAN_RTR_DATA;
+    last_four_motor_tx_message.DLC = 0x08;
+    HAL_CAN_AddTxMessage(&hcan1, &last_four_motor_tx_message, last_four_motor_can_send_data, &send_mail_box);//2
+      #endif
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -204,24 +195,6 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
-//该回调函数还存在于debug.c(已被if 0);
-
-#if 0
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-    if(huart->Instance==UART7)
-    {
-        HAL_UART_Receive_IT(&huart7,way,1);//坐标的输入暂定位于模式函数中，模式函数位于basic_action.c;
-    }
-//    if(huart->Instance==USART1)
-//    {
-//        remote_time=HAL_GetTick();
-//        ////////////////////get_real(xyz);//////////此处加入函数对输入的x,y,z坐标进行处理，得到能够适应当前机械臂位置的坐标，具体处理方法待定
-                                                    
-//        HAL_UART_Receive_DMA(&huart1,xyz,3);
-//    }
-}
-#endif
 /* USER CODE END 4 */
 
 /**
